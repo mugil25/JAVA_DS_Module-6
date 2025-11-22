@@ -1,107 +1,83 @@
-# Ex5 Count Inversions in an Array
-## DATE: 15.08.25
+# Ex4 You are given a Java program that performs matrix addition. If Matrix A has all odd numbers and Matrix B has all even numbers of the same dimension, what will be the nature (even/odd/mixed) of the resulting matrix?
+## DATE: 11.08.25
 ## AIM:
-To write a Java program  to Count the number of inversions in an array where inversion is defined as: arr[i] > arr[j] and i < j
+To write a java function to evaluate weather the given Matrix A has all odd numbers and Matrix B has all even numbers of the same dimension and find the nature of resultant matrrix.
 
 ## Algorithm
 Start the program.
 
-Read the number of elements and store them in an array.
+Read the dimensions of both matrices (rows and columns). Check whether Matrix A and Matrix B have the same dimensions. If not, display “Matrices are not of same dimension” and stop.
 
-Use a modified merge sort to count inversions: .Recursively split the array into halves and count inversions in each half. .While merging two sorted halves,
+Read Matrix A and check each element: If every element is odd, continue.
 
-Count cross inversions when an element from the right half is placed before elements remaining in the left half.
+If any element is even, mark A as invalid and stop further checking.
 
-Sum inversions from left half, right half, and cross inversions.
+Read Matrix A and check each element: If every element is odd, continue.
 
-Display the total inversion count.
+If any element is even, mark A as invalid and stop further checking.
 
-Stop the program.  
+If both matrices are valid, compute the resultant matrix (e.g., A + B or any operation specified). Determine the nature of the resultant matrix:
+
+If all elements are odd, print “Resultant matrix is an Odd Matrix”.
+
+If all elements are even, print “Resultant matrix is an Even Matrix”. Otherwise, print “Resultant matrix is a Mixed Matrix”.
+
+Display the Resultant Matrix.
+
+Stop the program. 
 
 ## Program:
 ```
 /*
-Program toto Count the number of inversions in an array where inversion is defined as: arr[i] > arr[j] and i < j
-Developed by: jAGADEESH J
-RegisterNumber:  212223110015
+Program to ind the nature of resultant matrrix.
+Developed by: Mugil Murugan
+RegisterNumber:  212223230127
 */
+
 import java.util.Scanner;
 
-public class CountInversions {
+public class MatrixAddition {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        // Input size
-        int n = sc.nextInt();
-        int[] arr = new int[n];
+        int rows = sc.nextInt();
+        int cols = sc.nextInt();
 
-        // Input array
-        for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
-        }
+        int[][] A = new int[rows][cols];
+        int[][] B = new int[rows][cols];
+        int[][] result = new int[rows][cols];
 
-        // Count inversions
-        long result = mergeSortAndCount(arr, 0, n - 1);
-        System.out.println(result);
-    }
-
-    // Merge Sort function
-    private static long mergeSortAndCount(int[] arr, int left, int right) {
-        long count = 0;
-        if (left < right) {
-            int mid = (left + right) / 2;
-
-            // Left subarray count
-            count += mergeSortAndCount(arr, left, mid);
-
-            // Right subarray count
-            count += mergeSortAndCount(arr, mid + 1, right);
-
-            // Merge count
-            count += mergeAndCount(arr, left, mid, right);
-        }
-        return count;
-    }
-
-    // Merge two sorted halves and count inversions
-    private static long mergeAndCount(int[] arr, int left, int mid, int right) {
-        int[] leftArr = new int[mid - left + 1];
-        int[] rightArr = new int[right - mid];
-
-        // Copy data to temp arrays
-        System.arraycopy(arr, left, leftArr, 0, leftArr.length);
-        System.arraycopy(arr, mid + 1, rightArr, 0, rightArr.length);
-
-        int i = 0, j = 0, k = left;
-        long swaps = 0;
-
-        // Merge process
-        while (i < leftArr.length && j < rightArr.length) {
-            if (leftArr[i] <= rightArr[j]) {
-                arr[k++] = leftArr[i++];
-            } else {
-                arr[k++] = rightArr[j++];
-                swaps += (mid + 1) - (left + i); // Count inversions
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                A[i][j] = sc.nextInt();
             }
         }
-
-        // Copy remaining elements
-        while (i < leftArr.length) {
-            arr[k++] = leftArr[i++];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                B[i][j] = sc.nextInt();
+            }
         }
-        while (j < rightArr.length) {
-            arr[k++] = rightArr[j++];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                result[i][j] = A[i][j] + B[i][j];
+            }
+        }
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                System.out.print(result[i][j] + " ");
+            }
+            System.out.println();
         }
 
-        return swaps;
+       
     }
 }
 ```
 
 ## Output:
-<img width="1232" height="337" alt="image" src="https://github.com/user-attachments/assets/896b3a4c-c4a1-41c6-bc9e-8e515bd7518a" />
 
+<img width="422" height="624" alt="image" src="https://github.com/user-attachments/assets/8711f81e-5705-4f46-9aac-dc78c6aaad8b" />
 
 
 ## Result:
-Thus the Java program to to Count the number of inversions in an array where inversion is defined as: arr[i] > arr[j] and i < jis implemented successfully.
+Thus, the java program to evaluate weather the given Matrix A has all odd numbers and Matrix B has all even numbers of the same dimension and find the nature of resultant matrrix is implemented successfully.
